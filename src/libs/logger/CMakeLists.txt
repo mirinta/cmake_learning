@@ -1,0 +1,17 @@
+set(LIBRARY_NAME logger)
+set(LIBRARY_EXPORTER_MACRO_NAME LOGGER_EXPORT)
+set(LIBRARY_EXPORTER_FILE_NAME logger_export.h)
+
+file(GLOB CURRENT_SOURCES *.cpp)
+
+add_library(${LIBRARY_NAME} SHARED ${CURRENT_SOURCES})
+
+target_link_libraries(${LIBRARY_NAME} PRIVATE spdlog::spdlog)
+
+include(GenerateExportHeader)
+generate_export_header(${LIBRARY_NAME}
+    EXPORT_MACRO_NAME ${LIBRARY_EXPORTER_MACRO_NAME}
+    EXPORT_FILE_NAME ${CMAKE_CURRENT_SOURCE_DIR}/${LIBRARY_EXPORTER_FILE_NAME}
+)
+
+target_include_directories(${LIBRARY_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/..)

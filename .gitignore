@@ -1,3 +1,10 @@
+*.user
+.vscode/
+*.exe
+*.dSYM
+build
+
+
 # Prerequisites
 *.d
 
